@@ -1,38 +1,62 @@
-.App {
-  text-align: center;
+body {
+  color: black;
+  background-color: #434b4d;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+input, select, #timeInput {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  display: block;
+  font-size: 14px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+#timeInput {
+  height: 43.75px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+button[type=submit] {
+  margin-top: 20px;
+  background-color: #3947de;
   color: white;
+  border: none;
+  width: 100%;
+  border-radius: 10px;
+  height: 35px;
+  padding: 5px 0px 10px 0px;
+  font-size: 16px;
+  cursor: pointer;
 }
 
-.App-link {
-  color: #61dafb;
+.flex {
+  display: flex;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.justify-center {
+  justify-content: center;
 }
+
+.justify-between {
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#form-taxi {
+  margin-top: 30px;
+  padding: 20px 50px;
+  border-radius: 20px;
+  background-color: #d9d9d9;
+  width: 70vh;
+}
+
+#timeInput {
+  color: black;
+}
+
