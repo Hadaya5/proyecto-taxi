@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import 'rc-time-picker/assets/index.css';
 import TimePicker from 'rc-time-picker';
 import moment from 'moment';
 import { Map } from './Map';
 import { formatDateTime } from '../utils/formatDateTime';
-
+import "../styles/Modal.css";
 
 const Form = () => {
-  const [selectedId, setSelectedId] = useState('');
+  const [selectedId, setSelectedId] = useState('1');
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedPassengers, setSelectedPassengers] = useState(1);
   const [selectedTime, setSelectedTime] = useState(moment());
@@ -15,6 +15,19 @@ const Form = () => {
   const [longitudeBegin, setLongitudeBegin] = useState(-74.0059)
   const [latitudeEnd, setLatitudeEnd] = useState('')
   const [longitudeEnd, setLongitudeEnd] = useState('')
+  const [modal, setModal] = useState(false);
+
+  const toggleModal = () => {
+    setModal(!modal);
+  };
+
+  useEffect(() => {
+    if(modal) {
+      document.body.classList.add('active-modal')
+    } else {
+      document.body.classList.remove('active-modal')
+    }
+  }, [modal])
 
   const handleIdChange = (e) => {
     setSelectedId(e.target.value);
@@ -32,8 +45,6 @@ const Form = () => {
     setSelectedPassengers(e.target.value);
   };
 
- 
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -48,6 +59,8 @@ const Form = () => {
     }
     console.log(data)
 
+    toggleModal();
+
     // fetch('ENDPOINT', {
     //     method: "POST",
     //     headers: {"Content-type": "application/json; charset=UTF-8"},
@@ -59,13 +72,18 @@ const Form = () => {
 
   };
 
+
+
+  
+
   return (
     <div className="flex justify-center">
     <form onSubmit={handleSubmit} id="form-taxi">
+      <h2 id='title'>Predecir duración del viaje</h2>
+      <hr />
       <div>
-        <label htmlFor="idSelect">Selecciona un ID:</label>
+        <label htmlFor="idSelect">Selecciona una empresa:</label>
         <select id="idSelect" value={selectedId} onChange={handleIdChange}>
-          <option value="">Selecciona una empresa:</option>
           <option value="1">Uber</option>
           <option value="2">Yummy Rides</option>
         </select>
@@ -90,14 +108,14 @@ const Form = () => {
         />
       </div>
       <div>
-        <p>Selecciona la ubicación de inicio:</p>
+        <p className='location-text'>Selecciona la ubicación de inicio:</p>
         <Map 
           latitude={latitudeBegin} 
           longitude={longitudeBegin} 
           setLatitude={setLatitudeBegin} 
           setLongitude={setLongitudeBegin} 
         />
-        <p>Selecciona la ubicación de llegada:</p>
+        <p className='location-text'>Selecciona la ubicación de llegada:</p>
         <Map 
           latitude={latitudeEnd} 
           longitude={longitudeEnd} 
@@ -107,6 +125,17 @@ const Form = () => {
       </div>
       <button type="submit">Enviar</button>
     </form>
+    {modal && 
+      <div className="modal">
+      <div onClick={toggleModal} className="overlay"></div>
+      <div className="modal-content">
+        <h2>Hello Modal</h2>
+        <button className="close-modal" onClick={toggleModal}>
+          <b>X</b>
+        </button>
+      </div>
+    </div>
+    }
     </div>
   );
 };

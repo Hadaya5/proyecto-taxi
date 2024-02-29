@@ -17,14 +17,32 @@ input, select, #timeInput {
   font-size: 14px;
 }
 
+label, .location-text {
+  font-weight: 500;
+}
+
+hr {
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+#title {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
 #timeInput {
   height: 43.75px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.rc-time-picker {
+  width: 100%;
+}
+
 button[type=submit] {
   margin-top: 20px;
-  background-color: #3947de;
+  background-color: #434b4d;
   color: white;
   border: none;
   width: 100%;
