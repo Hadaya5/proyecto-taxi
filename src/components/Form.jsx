@@ -16,9 +16,15 @@ const Form = () => {
   const [latitudeEnd, setLatitudeEnd] = useState('')
   const [longitudeEnd, setLongitudeEnd] = useState('')
   const [modal, setModal] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [travelTime, setTravelTime] = useState(0);
 
   const toggleModal = () => {
     setModal(!modal);
+
+    if(!loading){
+      setLoading(true);
+    }
   };
 
   useEffect(() => {
@@ -61,6 +67,12 @@ const Form = () => {
 
     toggleModal();
 
+    //TO DO: Borrar
+    setTimeout(() => {
+      setTravelTime(123)
+      setLoading(false)
+    }, 3000)
+
     // fetch('ENDPOINT', {
     //     method: "POST",
     //     headers: {"Content-type": "application/json; charset=UTF-8"},
@@ -71,9 +83,6 @@ const Form = () => {
     // .catch(err => console.log(err));
 
   };
-
-
-
   
 
   return (
@@ -82,22 +91,22 @@ const Form = () => {
       <h2 id='title'>Predecir duración del viaje</h2>
       <hr />
       <div>
-        <label htmlFor="idSelect">Selecciona una empresa:</label>
+        <label htmlFor="idSelect">Seleccione una empresa:</label>
         <select id="idSelect" value={selectedId} onChange={handleIdChange}>
           <option value="1">Uber</option>
           <option value="2">Yummy Rides</option>
         </select>
       </div>
       <div>
-        <label htmlFor="passengers">Selecciona el número de pasajeros:</label>
+        <label htmlFor="passengers">Seleccione el número de pasajeros:</label>
         <input type="number" id="passengers" value={selectedPassengers} onChange={handlePassengersChange} />
       </div>
       <div>
-        <label htmlFor="dateInput">Selecciona una fecha:</label>
+        <label htmlFor="dateInput">Seleccione una fecha:</label>
         <input type="date" id="dateInput" value={selectedDate} onChange={handleDateChange} />
       </div>
       <div>
-        <label htmlFor="timeInput">Selecciona el tiempo de inicio:</label>
+        <label htmlFor="timeInput">Seleccione la hora de inicio:</label>
         &nbsp;&nbsp;
         <TimePicker
             id="timeInput"
@@ -108,14 +117,14 @@ const Form = () => {
         />
       </div>
       <div>
-        <p className='location-text'>Selecciona la ubicación de inicio:</p>
+        <p className='location-text'>Seleccione la ubicación de inicio:</p>
         <Map 
           latitude={latitudeBegin} 
           longitude={longitudeBegin} 
           setLatitude={setLatitudeBegin} 
           setLongitude={setLongitudeBegin} 
         />
-        <p className='location-text'>Selecciona la ubicación de llegada:</p>
+        <p className='location-text'>Seleccione la ubicación de llegada:</p>
         <Map 
           latitude={latitudeEnd} 
           longitude={longitudeEnd} 
@@ -127,13 +136,19 @@ const Form = () => {
     </form>
     {modal && 
       <div className="modal">
-      <div onClick={toggleModal} className="overlay"></div>
-      <div className="modal-content">
-        <h2>Hello Modal</h2>
-        <button className="close-modal" onClick={toggleModal}>
-          <b>X</b>
-        </button>
-      </div>
+        <div onClick={toggleModal} className="overlay"></div>
+        <div className="modal-content">
+
+          {loading
+            ?
+              <h3>Cargando predicción...</h3>
+            :
+              <h3>La duración del viaje será de: {travelTime}</h3>
+          }
+          <button className="close-modal" onClick={toggleModal}>
+            <b>X</b>
+          </button>
+        </div>
     </div>
     }
     </div>
