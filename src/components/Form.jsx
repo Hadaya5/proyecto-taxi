@@ -93,8 +93,8 @@ const Form = () => {
       <div>
         <label htmlFor="idSelect">Seleccione una empresa:</label>
         <select id="idSelect" value={selectedId} onChange={handleIdChange}>
-          <option value="1">Uber</option>
-          <option value="2">Yummy Rides</option>
+          <option value="1">Taxi</option>
+          <option value="2">Limusina</option>
         </select>
       </div>
       <div>
