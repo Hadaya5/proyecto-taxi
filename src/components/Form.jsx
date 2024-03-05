@@ -143,7 +143,7 @@ const Form = () => {
             ?
               <h3>Cargando predicción...</h3>
             :
-              <h3>La duración del viaje será de: {travelTime}</h3>
+              <h3>La duración del viaje será de: {travelTime} segundos</h3>
           }
           <button className="close-modal" onClick={toggleModal}>
             <b>X</b>
